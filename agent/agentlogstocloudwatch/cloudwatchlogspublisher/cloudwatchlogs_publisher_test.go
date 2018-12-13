@@ -19,7 +19,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/aws/amazon-ssm-agent/agent/agentlogstocloudwatch/cloudwatchlogspublisher/mock"
+	cloudwatchlogspublisher_mock "github.com/aws/amazon-ssm-agent/agent/agentlogstocloudwatch/cloudwatchlogspublisher/mock"
 	"github.com/aws/amazon-ssm-agent/agent/agentlogstocloudwatch/cloudwatchlogsqueue"
 	"github.com/cihub/seelog"
 	"github.com/stretchr/testify/assert"
@@ -34,7 +34,7 @@ func TestCreateLogGroupError(t *testing.T) {
 	serviceMock.On("CreateLogGroup", mock.AnythingOfType("*log.Mock"), mock.AnythingOfType("string")).Return(errors.New("Log Group Creation Service Error"))
 
 	cwPublisher := CloudWatchPublisher{
-		log: logMock,
+		log:                   logMock,
 		cloudWatchLogsService: serviceMock,
 		instanceID:            "instanceID",
 	}
@@ -51,7 +51,7 @@ func TestCreateLogStreamError(t *testing.T) {
 	serviceMock.On("CreateLogStream", mock.AnythingOfType("*log.Mock"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errors.New("Log Stream Creation Service Error"))
 
 	cwPublisher := CloudWatchPublisher{
-		log: logMock,
+		log:                   logMock,
 		cloudWatchLogsService: serviceMock,
 		instanceID:            "instanceID",
 	}
